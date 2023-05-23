@@ -1,5 +1,5 @@
 databases:
-  - name: postgers
+  - name: postgres
     ipAllowList: []
 
 services:
@@ -13,7 +13,7 @@ services:
         sync: false
       - key: DATEBASE_URL  
         fromDatabase:
-          name: postgers
+          name: postgres
           property: connectionString
   - type: redis
     name: redis
