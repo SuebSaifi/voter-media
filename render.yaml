@@ -1,23 +1,18 @@
 databases:
   - name: postgres
-    ipAllowList: []
+    databaseName: voter_media_production
+    user: voter_media_production_user
 
 services:
   - type: web
-    name: rails
-    plan: free
+    name: votermedia
     env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: bundle exec rails s
+    startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
-      - key: RAILS_MASTER_KEY
-        sync: false
-      - key: DATEBASE_URL  
+      - key: DATABASE_URL
         fromDatabase:
           name: postgres
           property: connectionString
-  - type: redis
-    name: lightning
-    ipAllowList: []
-    plan: free
-    maxmemoryPolicy: noeviction
+      - key: RAILS_MASTER_KEY
+        sync: false
