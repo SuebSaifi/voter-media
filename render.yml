@@ -1,0 +1,22 @@
+databases:
+  - name: postgers
+    ipAllowList: []
+
+services:
+  - type: web
+    name: rails
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: DATEBASE_URL  
+        fromDatabase:
+          name: postgers
+          property: connectionString
+  - type: radis
+    name: radis
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction

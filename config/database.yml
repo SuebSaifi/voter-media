@@ -8,9 +8,10 @@ development:
   username: postgres
   password: 123456789
   host: localhost
-# production:
-#   <<: *default
-#   database: voter_media_development
-#   username: postgres!
-#   password: postgres!
-#   host: localhost
+
+production:
+  <<: *default
+  url : <%=ENV["DATABASE_URL"]%>
+  database: render_deploy_production
+  username: render_deploy
+  password: <%=ENV["RENDER_DEPLOY_DATABASE_PASSWORD"]%>
