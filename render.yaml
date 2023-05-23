@@ -16,7 +16,7 @@ services:
           name: postgres
           property: connectionString
   - type: redis
-    name: redis
+    name: lightning
     ipAllowList: []
     plan: free
     maxmemoryPolicy: noeviction
