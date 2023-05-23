@@ -1,0 +1,32 @@
+h1.text-3xl.text-center.mb-6.font-semibold Publications: Articles & papers
+- if current_admin_user.present?
+  .text-right.mr-4.mb-6
+    = link_to "Create New Publication", new_pub_path, data: {turbo: false}, class: "text-white text-right bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+.relative.overflow-x-auto.mb-6
+  table.w-full.text-sm.text-left.text-gray-500.dark:text-gray-400#datatable[style="border-bottom:none"]
+    thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
+      tr
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Date
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Title & link
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Pages
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Stars
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Country
+        th.px-6.py-3.border-none[scope="col" style="padding-left:20px; border:none"]
+          | Description
+        -if admin_user_signed_in?
+          th.px-6.py-3[scope="col"]
+            | Action
+    tbody
+      - @pubs.each do |pub|
+        = render "pubs/publication", pub: pub
+
+.px-6
+  p.text-sm
+    | Many of the above papers are also archived at
+    span.text-blue-700
+      = link_to('Social Science Research Network', 'http://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=1331') + '.'
